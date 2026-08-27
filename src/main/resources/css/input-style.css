@@ -1,0 +1,17 @@
+.input-aero {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    
+    -fx-border-color: rgba(100, 120, 140, 0.4);
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 6 10 6 10; 
+    -fx-prompt-text-fill: rgb(140, 150, 160); 
+}
+
+.input-aero:focused {
+    -fx-border-color: #38abe4;
+    -fx-border-width: 1.5;
+    
+    -fx-effect: dropshadow(three-pass-box, rgba(56, 171, 228, 0.4), 6, 0, 0, 0);
+}

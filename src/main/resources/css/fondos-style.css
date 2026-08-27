@@ -1,0 +1,11 @@
+.fondo-aero {
+    -fx-background-color: linear-gradient(to bottom, #006ec8, #4ab626);
+}
+
+.fondo-aero-aqua {
+    -fx-background-color: radial-gradient(focus-angle 0deg, focus-distance 0%, center 50% 50%, radius 100%, #B6F0E5 0%, #00A6A6 50%, #061830 100%);
+}
+
+.fondo-aero-aurora {
+    -fx-background-color: radial-gradient(focus-angle 0deg, focus-distance 0%, center 20% 80%, radius 120%, #D4FF66 0%, #009966 40%, #002244 100%);
+}

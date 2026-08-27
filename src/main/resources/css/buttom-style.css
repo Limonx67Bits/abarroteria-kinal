@@ -1,0 +1,99 @@
+.btn-primary {
+    -fx-background-color: linear-gradient(to bottom, #8ee2f5 0%, #38abe4 45%, #0078c8 100%);
+    -fx-text-fill: white;
+    -fx-background-radius: 18; 
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-effect: dropshadow(three-pass-box, rgba(56,171,228,0.3), 4, 0, 0, 1.5);
+    -fx-background-insets: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to bottom, #bbf2ff 0%, #64c8dc 45%, #008be4 100%);
+    -fx-cursor: hand;
+}
+
+.btn-primary:armed, .btn-primary:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0078c8 0%, #38abe4 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.btn-primary:focused {
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+
+.btn-secundary {
+    -fx-background-color: linear-gradient(to bottom, #b2f041 0%, #71c328 45%, #448014 100%);
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 4, 0, 0, 1.5);
+    -fx-background-insets: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+.btn-secundary:hover {
+    -fx-background-color: linear-gradient(to bottom, #ccff66 0%, #8cdc32 45%, #569e1b 100%);
+    -fx-cursor: hand;
+}
+
+.btn-secundary:armed, .btn-secundary:pressed {
+    -fx-background-color: linear-gradient(to bottom, #448014 0%, #71c328 100%);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.btn-secundary:focused {
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+
+.btn-third {
+    -fx-background-color: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-insets: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+.btn-third:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-border-color: #64c8dc;
+    -fx-cursor: hand;
+}
+
+.btn-third:armed, .btn-third:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.btn-third:focused {
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.btn-primary, .btn-secundary, .btn-third {
+    -fx-scale-shape: false;
+    -fx-center-shape: false;
+}
+
+.btn-primary, .btn-secundary, .btn-third {
+    -fx-min-width: 120px;
+    -fx-min-height: 35px;
+}
