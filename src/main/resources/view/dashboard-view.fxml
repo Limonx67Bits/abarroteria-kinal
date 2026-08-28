@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -100,43 +99,12 @@
                <children>
                   <VBox alignment="TOP_CENTER" layoutX="26.0" layoutY="31.0" prefHeight="339.0" prefWidth="170.0" spacing="10.0" styleClass="panel-cristal" stylesheets="@../css/glass-style.css">
                      <children>
-                        <Label text="Escribe algo ^^">
+                        <Label text="Abarroteria Kinal" textFill="#358c55">
                            <font>
-                              <Font name="Segoe UI" size="18.0" />
+                              <Font name="Segoe UI Bold" size="18.0" />
                            </font>
-                           <textFill>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop>
-                                       <color>
-                                          <Color red="0.09099999815225601" green="0.6499999761581421" blue="0.6313666701316833" />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="0.006711409395973154">
-                                       <color>
-                                          <Color red="0.09099999815225601" green="0.6499999761581421" blue="0.6313666701316833" />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="0.28523489932885904">
-                                       <color>
-                                          <Color red="0.20723684132099152" green="0.5526315569877625" blue="0.33388158679008484" />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="0.5570469798657718">
-                                       <color>
-                                          <Color red="0.09137427061796188" green="0.6578947305679321" blue="0.6390107274055481" />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="1.0">
-                                       <color>
-                                          <Color red="0.20723684132099152" green="0.5526315569877625" blue="0.33388158679008484" />
-                                       </color>
-                                    </Stop>
-                                 </stops>
-                              </LinearGradient>
-                           </textFill>
                         </Label>
-                        <TextArea maxHeight="140.0" maxWidth="155.0" minHeight="140.0" minWidth="140.0" prefHeight="140.0" prefWidth="140.0" />
+                        <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleEliminarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
                      </children>
                      <padding>
                         <Insets top="10.0" />

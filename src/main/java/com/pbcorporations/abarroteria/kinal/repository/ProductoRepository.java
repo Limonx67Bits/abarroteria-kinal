@@ -24,8 +24,24 @@ public class ProductoRepository {
                 );
             }
         }catch(SQLException e){
-            System.out.println("Error en mi la base de datos" + e.getMessage());
+            System.out.println("Error en la base de datos" + e.getMessage());
         }
         return lista;
+    }
+    
+    public boolean delete(Producto producto){
+        String sql = "delete from productos where id_producto = ?";
+        boolean estado = false;
+        try(PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)){
+            ps.setInt(1, producto.getIdProducto());
+            int filasAfectadas = ps.executeUpdate();
+            if(filasAfectadas > 0){
+                estado = true;
+            }
+        }catch(SQLException e){
+            System.out.println("Error en la base de datos" + e.getMessage());
+            estado = false;
+        }
+        return estado;
     }
 }

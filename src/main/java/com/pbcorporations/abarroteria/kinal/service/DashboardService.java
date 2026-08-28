@@ -17,4 +17,11 @@ public class DashboardService {
         }
         return repository.findAll();
     }
+    
+    public boolean eliminarProducto(Producto producto){
+        if(producto != null){
+            return repository.delete(producto);
+        }
+        return false;
+    }
 }
