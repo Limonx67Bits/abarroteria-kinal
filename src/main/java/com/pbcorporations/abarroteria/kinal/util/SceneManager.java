@@ -6,19 +6,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController;
 import main.java.com.pbcorporations.abarroteria.kinal.controller.LoginController;
 import main.java.com.pbcorporations.abarroteria.kinal.repository.AuthRepository;
+import main.java.com.pbcorporations.abarroteria.kinal.repository.ProductoRepository;
 import main.java.com.pbcorporations.abarroteria.kinal.service.AuthService;
+import main.java.com.pbcorporations.abarroteria.kinal.service.DashboardService;
 
 public class SceneManager {
     private final Stage stage;
+    private final String FXML_PATH = "/main/resources/view/";
     
     public SceneManager(Stage stage){
         this.stage = stage;
     }
     
     public void showLoginView() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/view/login-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "login-view.fxml"));
         
         loader.setControllerFactory(
         clazz -> {
@@ -54,22 +58,29 @@ public class SceneManager {
         alert.showAndWait();
     }
     
-        public void showDashboardView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/resources/view/dashboard-view.fxml"));
+        public void showDashboardView() throws Exception {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "dashboard-view.fxml"));
+            
+            loader.setControllerFactory(
+                    clazz -> {
+                        if(clazz == DashboardController.class){
+                            ProductoRepository repository = new ProductoRepository();
+                            DashboardService service = new DashboardService(repository);
+                            return new DashboardController(service, this);
+                        }
+                        try{
+                            return clazz.getDeclaredConstructor().newInstance();
+                        }catch (Exception e){
+                            throw new RuntimeException("Error al crear constructor... " + e.getMessage());
+                        }
+                    });
             
             Parent root = loader.load();
-            
-            Scene scene = new Scene(root, 1024, 728);
-            
-            stage.setMinWidth(800);
-            stage.setMinHeight(600);
+            Scene scene = new Scene(root, 600, 600);
+            stage.setMinHeight(360);
+            stage.setMinWidth(420);
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlertInfo("Error de Navegación", "No se pudo cargar la vista", "Error al abrir el Dashboard: " + e.getMessage(), AlertType.ERROR);
-        }
     }
 }

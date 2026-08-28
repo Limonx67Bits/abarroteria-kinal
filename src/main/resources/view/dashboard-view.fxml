@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,7 +19,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21.0.1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
    <stylesheets>
       <URL value="@../css/dashboard-view.css" />
       <URL value="@../css/fondos-style.css" />
@@ -44,6 +46,14 @@
                <children>
                   <VBox alignment="BOTTOM_CENTER" layoutX="8.0" layoutY="31.0" prefHeight="339.0" prefWidth="362.0" spacing="10.0" styleClass="panel-cristal" stylesheets="@../css/glass-style.css">
                      <children>
+                        <TableView fx:id="tableViewProductos" prefHeight="200.0" prefWidth="340.0" styleClass="tabla-cristal" stylesheets="@../css/glass-style.css">
+                          <columns>
+                            <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="columnNombreProducto" prefWidth="143.0" text="NombreProducto" />
+                              <TableColumn fx:id="columnStock" prefWidth="51.0" text="Stock" />
+                              <TableColumn fx:id="columnPrecio" prefWidth="59.0" text="Precio" />
+                          </columns>
+                        </TableView>
                         <Label text="Bienvenido!">
                            <font>
                               <Font name="Segoe UI" size="54.0" />
@@ -78,7 +88,7 @@
                         <Button contentDisplay="BOTTOM" mnemonicParsing="false" styleClass="btn-secundary" stylesheets="@../css/buttom-style.css" text="Toca este botón" />
                      </children>
                      <padding>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
                </children>
