@@ -47,7 +47,7 @@ public class LoginController implements Initializable {
     }
     
     @FXML
-    public void handleLogin(){
+    public void handleLogin() throws Exception{
         if(txtFieldEmail.getText().isEmpty() || pwField.getText().isEmpty()){
             sceneManager.showAlertInfo("Campos sin llenar", "No se pueden dejar espacios en blanco", "Intenta de nuevo", Alert.AlertType.INFORMATION);
         }else{
