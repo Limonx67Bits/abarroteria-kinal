@@ -1,5 +1,6 @@
 package main.java.com.pbcorporations.abarroteria.kinal.repository;
 
+import java.math.BigDecimal;
 import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +42,27 @@ public class ProductoRepository {
         }catch(SQLException e){
             System.out.println("Error en la base de datos" + e.getMessage());
             estado = false;
+        }
+        return estado;
+    }    
+    
+    public boolean agregar(Producto producto){
+        String sql = "insert into productos (nombre_producto, stock, precio) values (?, ?, ?)";
+        boolean estado = false;
+        
+        try (PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)) {
+              ps.setString(1, producto.getNombreProducto());
+              ps.setInt(2, producto.getStock());
+              ps.setBigDecimal(3, producto.getPrecio());
+              
+              int filasAfectadas = ps.executeUpdate();
+              if (filasAfectadas > 0) {
+                  estado = true;
+              }
+            
+       } catch (SQLException e) {
+           System.out.println("Error en la base de datos" + e.getMessage());
+           estado = false;
         }
         return estado;
     }
