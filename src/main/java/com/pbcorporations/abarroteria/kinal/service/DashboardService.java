@@ -24,4 +24,14 @@ public class DashboardService {
         }
         return false;
     }
+    
+    public boolean agregarProducto(Producto producto) {
+        if (producto == null) {
+            throw new RuntimeException("Los datos del producto están vacíos");
+        }else if (producto.getNombreProducto() == null || producto.getNombreProducto().isEmpty()) {
+            throw new RuntimeException("El nombre del producto no puede estar en blanco");
+        }
+       return repository.agregar(producto);     
+        
+    }
 }
