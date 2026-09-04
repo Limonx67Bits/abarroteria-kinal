@@ -2,8 +2,13 @@ package main.java.com.pbcorporations.abarroteria.kinal.service;
 
 import main.java.com.pbcorporations.abarroteria.kinal.dto.request.LoginDTORequest;
 import main.java.com.pbcorporations.abarroteria.kinal.dto.response.LoginDTOResponse;
+import main.java.com.pbcorporations.abarroteria.kinal.model.Usuario;
 import main.java.com.pbcorporations.abarroteria.kinal.repository.AuthRepository;
 import main.java.com.pbcorporations.abarroteria.kinal.security.jbcrypt.BCrypt;
+/**
+ *
+ * @author dbarrientos
+ */
 
 public class AuthService {
     private final AuthRepository authRepository;
@@ -34,5 +39,19 @@ public class AuthService {
             }
         }
         return null;
+    }
+    
+        public boolean makeNewUser(Usuario user) {
+           boolean registro;
+        String hashContrasena = BCrypt.hashpw(user.getContrasena_hash(), BCrypt.gensalt(12));
+        Usuario userARegistrar = new Usuario();
+        userARegistrar.setId_usuario(user.getId_usuario());
+        userARegistrar.setNombre(user.getNombre());
+        userARegistrar.setApellido(user.getApellido());
+        userARegistrar.setEmail(user.getEmail());
+        userARegistrar.setContrasena_hash(hashContrasena);
+        userARegistrar.setId_rol(user.getId_rol());
+        registro = authRepository.save(user);
+        return registro;
     }
 }

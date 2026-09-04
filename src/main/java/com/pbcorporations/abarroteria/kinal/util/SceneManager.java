@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import main.java.com.pbcorporations.abarroteria.kinal.controller.AuthController;
 import main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController;
 import main.java.com.pbcorporations.abarroteria.kinal.controller.LoginController;
 import main.java.com.pbcorporations.abarroteria.kinal.repository.AuthRepository;
@@ -82,5 +83,33 @@ public class SceneManager {
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();
+    }
+        
+    public void showRegisterView() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "register-view.fxml"));
+        
+        loader.setControllerFactory(
+        clazz -> {
+            if(clazz == AuthController.class){
+                AuthRepository repository = new AuthRepository();
+                AuthService service = new AuthService(repository);
+                return new AuthController(service, this);
+            }
+            
+            try{
+                return clazz.getDeclaredConstructor().newInstance();
+            }catch (Exception e){
+                throw new RuntimeException("Error al crear constructor... " + e.getMessage());
+            }
+        }
+        );
+        
+        Parent root = loader.load();
+        Scene scene = new Scene(root, 600, 600);
+        stage.setMinWidth(420);
+        stage.setMinHeight(360);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 }
