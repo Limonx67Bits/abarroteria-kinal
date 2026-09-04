@@ -44,4 +44,23 @@ public class ProductoRepository {
         }
         return estado;
     }
+
+    public boolean update(Producto producto){
+        String sql = "update productos set nombre_producto = ?, stock = ?, precio = ? where id_producto = ?";
+        boolean estado = false;
+        try(PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)){
+            ps.setString(1, producto.getNombreProducto());
+            ps.setInt(2, producto.getStock());
+            ps.setBigDecimal(3, producto.getPrecio());
+            ps.setInt(4, producto.getIdProducto());
+            int filasAfectadas = ps.executeUpdate();
+            if(filasAfectadas > 0){
+                estado = true;
+            }
+        }catch(SQLException e){
+            System.out.println("Error en la base de datos " + e.getMessage());
+            estado = false;
+        }
+        return estado;
+    }
 }

@@ -68,4 +68,21 @@ public class DashboardController implements Initializable {
             manager.showAlertInfo("Eliminación invalida", "Eliminando...", "No haz seleccionado ningún objeto para eliminar.", Alert.AlertType.WARNING);
         }
     }
+
+    @FXML
+    private void handleActualizarProducto(){
+        Producto productoSeleccionado = tableViewProductos.getSelectionModel().getSelectedItem();
+        
+        if(productoSeleccionado != null){
+            boolean productoActualizado = service.actualizarProducto(productoSeleccionado);
+            if(productoActualizado){
+                tableViewProductos.refresh();
+                manager.showAlertInfo("Actualización exitosa", "Actualizando...", "El objeto fue modificado en la base de datos con éxito.", Alert.AlertType.INFORMATION);
+            }else{
+                manager.showAlertInfo("Actualización fallida", "Actualizando...", "El objeto no pudo ser actualizado.", Alert.AlertType.ERROR);
+            }
+        }else{
+            manager.showAlertInfo("Actualización inválida", "Actualizando...", "No has seleccionado ningún objeto para actualizar.", Alert.AlertType.WARNING);
+        }
+    }
 }
