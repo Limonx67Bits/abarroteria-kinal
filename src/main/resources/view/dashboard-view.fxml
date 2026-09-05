@@ -105,6 +105,7 @@
                            </font>
                         </Label>
                         <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleEliminarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
+                        <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#handleActualizarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Actualizar" />
                      </children>
                      <padding>
                         <Insets top="10.0" />
