@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
    <stylesheets>
       <URL value="@../css/dashboard-view.css" />
       <URL value="@../css/fondos-style.css" />
@@ -84,7 +84,6 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Button contentDisplay="BOTTOM" mnemonicParsing="false" styleClass="btn-secundary" stylesheets="@../css/buttom-style.css" text="Toca este botón" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -104,8 +103,9 @@
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleEliminarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
+                        <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#handleAgregarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Agregar" />
                         <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#handleActualizarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Actualizar" />
+                        <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleEliminarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
                      </children>
                      <padding>
                         <Insets top="10.0" />
