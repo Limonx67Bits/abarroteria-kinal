@@ -44,6 +44,16 @@ public class ProductoRepository {
             estado = false;
         }
         return estado;
+    }
+
+    public boolean update(Producto producto){
+        String sql = "update productos set nombre_producto = ?, stock = ?, precio = ? where id_producto = ?";
+        boolean estado = false;
+        try(PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)){
+            ps.setString(1, producto.getNombreProducto());
+            ps.setInt(2, producto.getStock());
+            ps.setBigDecimal(3, producto.getPrecio());
+            ps.setInt(4, producto.getIdProducto());
     }    
     
     public boolean agregar(Producto producto){
