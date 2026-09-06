@@ -85,4 +85,21 @@ public class DashboardController implements Initializable {
             manager.showAlertInfo("Actualización inválida", "Actualizando...", "No has seleccionado ningún objeto para actualizar.", Alert.AlertType.WARNING);
         }
     }
+    
+    @FXML
+    private void handleAgregarProducto(){
+        Producto productoSeleccionado = tableViewProductos.getSelectionModel().getSelectedItem();
+        
+        if(productoSeleccionado != null){
+            boolean productoAgregado = service.agregarProducto(productoSeleccionado);
+            if(productoAgregado){
+                tableViewProductos.refresh();
+                manager.showAlertInfo("Producto agregado", "Agregando...", "El objeto fue agregado en la base de datos con exito", Alert.AlertType.INFORMATION);
+            }else{
+                manager.showAlertInfo("Producto no agregado", "Agregando...", "El objeto no pudo ser agregado", Alert.AlertType.ERROR);
+            }
+        }else{
+            manager.showAlertInfo("Acción invalida", "Agregando...", "No has seleccionado ningún objeto para actualizar.", Alert.AlertType.WARNING);
+        }
+    }
 }
