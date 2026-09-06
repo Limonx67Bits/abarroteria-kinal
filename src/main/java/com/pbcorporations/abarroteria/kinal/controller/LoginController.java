@@ -62,7 +62,9 @@ public class LoginController implements Initializable {
     }
     
     @FXML
-    public void handleRegister(){
+    public void handleRegister() throws Exception{
+        
+        sceneManager.showRegisterView();
         
     }
 }
