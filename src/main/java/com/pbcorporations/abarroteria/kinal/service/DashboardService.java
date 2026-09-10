@@ -29,23 +29,56 @@ public class DashboardService {
     public boolean agregarProducto(Producto producto) {
         if (producto == null) {
             throw new RuntimeException("Los datos del producto están vacíos");
-        }else if (producto.getNombreProducto() == null || producto.getNombreProducto().isEmpty()
+        } else if (producto.getNombreProducto() == null || producto.getNombreProducto().isEmpty()
                 || producto.getPrecio() == null || producto.getPrecio().compareTo(BigDecimal.ZERO) <= 0
                 || producto.getStock() <= 0) {
             throw new RuntimeException("Revise los datos ingresados");
         }
-       return repository.agregar(producto);     
-        
+        return repository.agregar(producto);     
     }
     
     public boolean actualizarProducto(Producto producto) {
         if(producto == null){
-            throw new RuntimeException("Los datos del producto son vacios");
-        }else if (producto.getNombreProducto() == null || producto.getNombreProducto().isEmpty()
+            throw new RuntimeException("Los datos del producto son vacíos");
+        } else if (producto.getNombreProducto() == null || producto.getNombreProducto().isEmpty()
                 || producto.getPrecio() == null || producto.getPrecio().compareTo(BigDecimal.ZERO) <= 0
                 || producto.getStock() <= 0){
             throw new RuntimeException("Revise los datos ingresados");
         }
         return repository.update(producto);
+    }
+
+    
+
+    public int obtenerTotalProductos() {
+        ObservableList<Producto> lista = repository.findAll();
+        return lista != null ? lista.size() : 0;
+    }
+
+    public BigDecimal obtenerValorTotalInventario() {
+        ObservableList<Producto> lista = repository.findAll();
+        BigDecimal total = BigDecimal.ZERO;
+        if (lista != null) {
+            for (Producto p : lista) {
+                if (p.getPrecio() != null) {
+                    BigDecimal subtotal = p.getPrecio().multiply(new BigDecimal(p.getStock()));
+                    total = total.add(subtotal);
+                }
+            }
+        }
+        return total;
+    }
+
+    public int obtenerConteoStockBajo() {
+        ObservableList<Producto> lista = repository.findAll();
+        int conteo = 0;
+        if (lista != null) {
+            for (Producto p : lista) {
+                if (p.getStock() < 5) {
+                    conteo++;
+                }
+            }
+        }
+        return conteo;
     }
 }
