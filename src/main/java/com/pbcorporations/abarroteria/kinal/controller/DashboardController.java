@@ -137,18 +137,78 @@ public class DashboardController implements Initializable {
         Producto productoSeleccionado = tableViewProductos.getSelectionModel().getSelectedItem();
         
         if (productoSeleccionado != null) {
-            boolean productoActualizado = service.actualizarProducto(productoSeleccionado);
-            if (productoActualizado) {
-                tableViewProductos.refresh();
-                actualizarMetricas();
-                if (manager != null) {
-                    manager.showAlertInfo("Actualización exitosa", "Actualizando...", "El objeto fue modificado en la base de datos con éxito.", Alert.AlertType.INFORMATION);
+           
+            Dialog<Producto> dialog = new Dialog<>();
+            dialog.setTitle("Editar Producto");
+            dialog.setHeaderText("Modifique los datos del producto (ID: " + productoSeleccionado.getIdProducto() + "):");
+
+            ButtonType btnGuardarType = new ButtonType("Guardar Cambios", javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(btnGuardarType, ButtonType.CANCEL);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+           
+            TextField txtNombre = new TextField(productoSeleccionado.getNombreProducto());
+            TextField txtStock = new TextField(String.valueOf(productoSeleccionado.getStock()));
+            TextField txtPrecio = new TextField(productoSeleccionado.getPrecio() != null ? productoSeleccionado.getPrecio().toString() : "");
+
+            grid.add(new Label("Nombre:"), 0, 0);
+            grid.add(txtNombre, 1, 0);
+            grid.add(new Label("Stock:"), 0, 1);
+            grid.add(txtStock, 1, 1);
+            grid.add(new Label("Precio (Q):"), 0, 2);
+            grid.add(txtPrecio, 1, 2);
+
+            dialog.getDialogPane().setContent(grid);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == btnGuardarType) {
+                    try {
+                        String nuevoNombre = txtNombre.getText().trim();
+                        int nuevoStock = Integer.parseInt(txtStock.getText().trim());
+                        BigDecimal nuevoPrecio = new BigDecimal(txtPrecio.getText().trim());
+
+                        productoSeleccionado.setNombreProducto(nuevoNombre);
+                        productoSeleccionado.setStock(nuevoStock);
+                        productoSeleccionado.setPrecio(nuevoPrecio);
+
+                        return productoSeleccionado;
+                    } catch (NumberFormatException e) {
+                        if (manager != null) {
+                            manager.showAlertInfo("Error de datos", "Datos inválidos", "Ingrese valores numéricos válidos en stock y precio.", Alert.AlertType.ERROR);
+                        }
+                        return null;
+                    }
                 }
-            } else {
-                if (manager != null) {
-                    manager.showAlertInfo("Actualización fallida", "Actualizando...", "El objeto no pudo ser actualizado.", Alert.AlertType.ERROR);
+                return null;
+            });
+
+            Optional<Producto> result = dialog.showAndWait();
+
+            result.ifPresent(productoEditado -> {
+                try {
+                    boolean productoActualizado = service.actualizarProducto(productoEditado);
+                    if (productoActualizado) {
+                        tableViewProductos.refresh();
+                        actualizarMetricas();
+                        if (manager != null) {
+                            manager.showAlertInfo("Actualización exitosa", "Actualizando...", "El objeto fue modificado en la base de datos con éxito.", Alert.AlertType.INFORMATION);
+                        }
+                    } else {
+                        if (manager != null) {
+                            manager.showAlertInfo("Actualización fallida", "Actualizando...", "El objeto no pudo ser actualizado.", Alert.AlertType.ERROR);
+                        }
+                    }
+                } catch (RuntimeException e) {
+                    if (manager != null) {
+                        manager.showAlertInfo("Error de validación", "Atención", e.getMessage(), Alert.AlertType.WARNING);
+                    }
                 }
-            }
+            });
+
         } else {
             if (manager != null) {
                 manager.showAlertInfo("Actualización inválida", "Actualizando...", "No has seleccionado ningún objeto para actualizar.", Alert.AlertType.WARNING);
@@ -158,7 +218,7 @@ public class DashboardController implements Initializable {
     
     @FXML
     private void handleAgregarProducto() {
-        // Formulario modal dinámico para ingresar datos del nuevo producto
+      
         Dialog<Producto> dialog = new Dialog<>();
         dialog.setTitle("Agregar Producto");
         dialog.setHeaderText("Ingrese los datos del nuevo producto:");
@@ -234,4 +294,3 @@ public class DashboardController implements Initializable {
         });
     }
 }
-
