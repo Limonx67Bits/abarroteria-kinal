@@ -13,6 +13,7 @@ import main.java.com.pbcorporations.abarroteria.kinal.repository.AuthRepository;
 import main.java.com.pbcorporations.abarroteria.kinal.repository.ProductoRepository;
 import main.java.com.pbcorporations.abarroteria.kinal.service.AuthService;
 import main.java.com.pbcorporations.abarroteria.kinal.service.DashboardService;
+import main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController;
 
 public class SceneManager {
     private final Stage stage;
@@ -59,7 +60,7 @@ public class SceneManager {
         alert.showAndWait();
     }
     
-        public void showDashboardView() throws Exception {
+        public void showDashboardView(String nombreRol) throws Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + "dashboard-view.fxml"));
             
             loader.setControllerFactory(
@@ -77,6 +78,11 @@ public class SceneManager {
                     });
             
             Parent root = loader.load();
+            
+            DashboardController dashboardController = loader.getController();
+            if(dashboardController != null){
+                dashboardController.configurarVistasPorRol(nombreRol);
+            }
             Scene scene = new Scene(root, 600, 600);
             stage.setMinHeight(360);
             stage.setMinWidth(420);

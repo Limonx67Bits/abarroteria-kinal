@@ -48,23 +48,28 @@ public class LoginController implements Initializable {
     
     @FXML
     public void handleLogin() throws Exception{
-        if(txtFieldEmail.getText().isEmpty() || pwField.getText().isEmpty()){
-            sceneManager.showAlertInfo("Campos sin llenar", "No se pueden dejar espacios en blanco", "Intenta de nuevo", Alert.AlertType.INFORMATION);
-        }else{
-            try{
-                LoginDTOResponse response = authService.login(new LoginDTORequest(txtFieldEmail.getText(), pwField.getText()));
+    if(txtFieldEmail.getText().isEmpty() || pwField.getText().isEmpty()){
+        sceneManager.showAlertInfo("Campos sin llenar", "No se pueden dejar espacios en blanco", "Intenta de nuevo", Alert.AlertType.INFORMATION);
+    }else{
+        try{
+            LoginDTOResponse response = authService.login(new LoginDTORequest(txtFieldEmail.getText(), pwField.getText()));
+            
+           
+            if (response != null) {
                 sceneManager.showAlertInfo("Es bueno verte de nuevo", "¡Bienvenido " + response.getNombre() + "!", "Inicio de sesión correcto", Alert.AlertType.INFORMATION);
-                sceneManager.showDashboardView();
-            }catch (RuntimeException re){
-                sceneManager.showAlertInfo("Error al iniciar sesión", "Verificar campos", "No se ha podido iniciar sesión", Alert.AlertType.WARNING);
+                sceneManager.showDashboardView(response.getNombreRol());
+            } else {
+                sceneManager.showAlertInfo("Credenciales incorrectas", "Verificar campos", "El correo o la contraseña no coinciden.", Alert.AlertType.WARNING);
             }
+            
+        } catch (RuntimeException re) {
+            re.printStackTrace(); 
+            sceneManager.showAlertInfo("Error del sistema", "Error interno", "Revisa la consola para más detalles.", Alert.AlertType.ERROR);
         }
+      }
     }
-    
     @FXML
-    public void handleRegister() throws Exception{
-        
-        sceneManager.showRegisterView();
-        
+    public void handleRegister() throws Exception {
+    sceneManager.showRegisterView();
     }
 }

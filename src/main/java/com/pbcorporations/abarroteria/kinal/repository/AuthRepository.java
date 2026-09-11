@@ -18,30 +18,30 @@ public class AuthRepository {
     
     private Boolean estado = false;
     
-    public LoginDTOResponse findUserByEmail(LoginDTORequest request){
-        
-        String sql = "select u.nombre, u.apellido, u.contrasena_hash, r.nombre_rol\n" +
-                           "from usuarios as u\n" +
-                           "inner join roles as r\n" +
-                           "on u.id_rol = r.id_rol\n" +
-                           "where  u.email = ? ";
-        
-        try(PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)){
-            ps.setString(1, request.getEmail());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return new LoginDTOResponse(
-                        rs.getString("nombre"),
-                        rs.getString("apellido"),
-                        rs.getString("contrasena_hash"),
-                        rs.getString("nombre_rol")
-                );
-            }
-        }catch(SQLException e){
-            System.out.println("Error al buscar en la base de datos" + e.getMessage());
+public LoginDTOResponse findUserByEmail(LoginDTORequest request){
+    String sql = "select u.nombre, u.apellido, u.contrasena_hash, r.nombre_rol\n" +
+                       "from usuarios as u\n" +
+                       "inner join roles as r\n" +
+                       "on u.id_rol = r.id_rol\n" +
+                       "where  u.email = ? ";
+
+    try(PreparedStatement ps = DataBaseConnection.getDBConnection().prepareStatement(sql)){
+        ps.setString(1, request.getEmail());
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()){
+            return new LoginDTOResponse(
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("contrasena_hash"),
+                    rs.getString("nombre_rol")
+            );
         }
-        return null;
+    }catch(SQLException e){
+        System.out.println("Error al buscar en la base de datos: " + e.getMessage());
     }
+    return null;
+}
     
      public boolean save(Usuario usuario){
         
@@ -67,8 +67,18 @@ public class AuthRepository {
         
         return estado;
     }
-    
-
+     
+     public void registrarAccesoBitacora(String emailUsuario) {
+         String sql = "INSERT INTO bitacora_accesos (email_usuario, fecha_acceso) VALUES (?, NOW());";
+         
+         try (PreparedStatement ps = DataBaseConnection.getDBConnection().prepareCall(sql)){
+         ps.setString(1, emailUsuario);
+         ps.executeUpdate();
+         } catch (SQLException e){
+             System.out.println("Error al registar bitácora:" + e.getMessage());
+         }
+   
+       }
     
 }
 

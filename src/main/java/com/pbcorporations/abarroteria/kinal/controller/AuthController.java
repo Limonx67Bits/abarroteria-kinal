@@ -4,6 +4,7 @@
  */
 package main.java.com.pbcorporations.abarroteria.kinal.controller;
 
+import java.util.Set;
 import java.util.UUID;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -50,6 +51,7 @@ public class AuthController {
      
      public void registerUser(){
          boolean registro;
+
         if(txtNombre.getText().isBlank() || txtNombre.getText().isEmpty() ||
         txtApellido.getText().isBlank() || txtApellido.getText().isEmpty() ||
         txtEmail.getText().isBlank() || txtEmail.getText().isEmpty() ||
@@ -58,13 +60,12 @@ public class AuthController {
             sceneManager.showAlertInfo("Campos vacios", "Verificar campos", "No se ha podido registrar el usuario", Alert.AlertType.ERROR);
         }else{
         try{ 
-        String contrasena_hash = BCrypt.hashpw(txtContrasena.getText(), BCrypt.gensalt(12));
         Usuario user = new Usuario();
         user.setId_usuario(UUID.randomUUID().toString());
         user.setNombre(txtNombre.getText());
         user.setApellido(txtApellido.getText());
         user.setEmail(txtEmail.getText());
-        user.setContrasena_hash(contrasena_hash);
+        user.setContrasena_hash(txtContrasena.getText());
         user.setId_rol(Integer.parseInt(txtId_rol.getText()));
         registro = authService.makeNewUser(user);
         if (registro){
