@@ -102,4 +102,9 @@ public class DashboardController implements Initializable {
             manager.showAlertInfo("Acción invalida", "Agregando...", "No has seleccionado ningún objeto para actualizar.", Alert.AlertType.WARNING);
         }
     }
+    
+    @FXML
+    private void handleMostrarClientes() throws Exception{
+        manager.showClienteView();
+    }
 }

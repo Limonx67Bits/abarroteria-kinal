@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.DashboardController">
    <stylesheets>
       <URL value="@../css/dashboard-view.css" />
       <URL value="@../css/fondos-style.css" />
@@ -106,6 +107,8 @@
                         <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#handleAgregarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Agregar" />
                         <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#handleActualizarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Actualizar" />
                         <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleEliminarProducto" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
+                        <Region prefHeight="38.0" prefWidth="166.0" />
+                        <Button fx:id="btnEliminar1" mnemonicParsing="false" onAction="#handleMostrarClientes" styleClass="btn-primary" stylesheets="@../css/buttom-style.css" text="Clientes" />
                      </children>
                      <padding>
                         <Insets top="10.0" />
