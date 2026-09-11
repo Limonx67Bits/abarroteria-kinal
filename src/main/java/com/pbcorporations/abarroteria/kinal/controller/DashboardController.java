@@ -29,6 +29,67 @@ public class DashboardController implements Initializable {
     private TableColumn<Producto, BigDecimal> columnStock;
     @FXML
     private TableColumn<Producto, Integer> columnPrecio;
+    @FXML
+    private Button btnAgregar;
+    @FXML
+    private Button btnActualizar;
+    @FXML
+    private Button btnEliminar;
+
+  
+    public void configurarVistasPorRol(String nombreRol) {
+       
+    if (nombreRol == null) {
+        ocultarTodo();
+        return;
+    }
+
+    switch (nombreRol.toLowerCase()) {
+        case "admin":
+            
+            mostrarBoton(btnAgregar, true);
+            mostrarBoton(btnActualizar, true);
+            mostrarBoton(btnEliminar, true);
+            break;
+
+        case "user":
+            
+            mostrarBoton(btnAgregar, true);
+            mostrarBoton(btnActualizar, true);
+            mostrarBoton(btnEliminar, false);
+            break;
+
+        case "tester":
+            
+            mostrarBoton(btnAgregar, true);
+            mostrarBoton(btnActualizar, true);
+            mostrarBoton(btnEliminar, true);
+            break;
+
+        case "cliente":
+            // Solo lectura
+            ocultarTodo();
+            break;
+
+        default:
+           
+            ocultarTodo();
+            break;
+    }
+ }
+
+    private void ocultarTodo() {
+    mostrarBoton(btnAgregar, false);
+    mostrarBoton(btnActualizar, false);
+    mostrarBoton(btnEliminar, false);
+    }
+
+    private void mostrarBoton(Button boton, boolean visible) {
+    if (boton != null) {
+        boton.setVisible(visible);
+        boton.setManaged(visible);
+    }
+   }
 
     public DashboardController(DashboardService service, SceneManager manager) {
         this.service = service;
