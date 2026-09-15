@@ -18,7 +18,7 @@ public class ClienteRepository {
     public ObservableList<ClienteDTOResponse> findAll() {
         String sql = "select c.id_cliente, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente, "
                 + "t.telefono, "
-                + "CONCAT(d.ciudad, ' ', d.zona, ' ', d.noCasa, ' ', d.colonia, ' ', d.calle) as direccion_cliente "
+                + "CONCAT(d.ciudad, ' ', d.zona, ' ', d.no_casa, ' ', d.colonia, ' ', d.calle) as direccion_cliente "
                 + "from clientes as c "
                 + "left join telefonos as t on c.id_cliente = t.id_cliente "
                 + "left join direcciones as d on c.id_direccion = d.id_direccion";
@@ -40,7 +40,7 @@ public class ClienteRepository {
     }
 
     public boolean save(ClienteDTORequest request) {
-        String sqlDireccion = "insert into direcciones (id_direccion, ciudad, zona, noCasa, colonia, calle) values(?, ?, ?, ?, ?, ?)";
+        String sqlDireccion = "insert into direcciones (id_direccion, ciudad, zona, no_casa, colonia, calle) values(?, ?, ?, ?, ?, ?)";
         String sqlCliente = "insert into clientes (id_cliente, id_direccion, nombre, apellido) values(?, ?, ?, ?)";
         String sqlTelefono = "insert into telefonos (id_telefono, id_cliente, telefono) values(?, ?, ?)";
 
@@ -100,7 +100,7 @@ public class ClienteRepository {
     public boolean update(String idCliente, ClienteDTORequest request) {
         String sqlBuscarIds = "select id_direccion from clientes where id_cliente = ?";
         String sqlDireccion = "update direcciones set ciudad = ?, zona = ?, no_casa = ?, colonia = ?, calle = ? where id_direccion = ?";
-        String sqlCliente = "update clientes set nombre = ?, apellido = ?, where id_cliente = ?";
+        String sqlCliente = "update clientes set nombre = ?, apellido = ? where id_cliente = ?";
         String sqlTelefono = "update telefonos set telefono = ? where id_cliente = ?";
 
         try (Connection conn = DataBaseConnection.getDBConnection()) {

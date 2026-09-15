@@ -1,6 +1,5 @@
 package main.java.com.pbcorporations.abarroteria.kinal.service;
 
-import java.util.List;
 import javafx.collections.ObservableList;
 import main.java.com.pbcorporations.abarroteria.kinal.dto.request.ClienteDTORequest;
 import main.java.com.pbcorporations.abarroteria.kinal.dto.response.ClienteDTOResponse;

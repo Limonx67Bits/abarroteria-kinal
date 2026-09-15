@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.ClienteController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.pbcorporations.abarroteria.kinal.controller.ClienteController">
     <stylesheets>
-        <URL value="@cliente-view.css" />
+        <URL value="@../css/cliente-view.css" />
     </stylesheets>
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo-aero" stylesheets="@../css/fondos-style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" spacing="5.0" styleClass="panel-cristal" stylesheets="@../css/glass-style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" styleClass="btn-primary" stylesheets="@../css/buttom-style.css" text="Agregar" />
-                  <Button mnemonicParsing="false" styleClass="btn-secundary" stylesheets="@../css/buttom-style.css" text="Actualizar" />
-                  <Button mnemonicParsing="false" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
+                  <Button mnemonicParsing="false" onAction="#handleAgregarCliente" styleClass="btn-primary" stylesheets="@../css/buttom-style.css" text="Agregar" />
+                  <Button mnemonicParsing="false" onAction="#handleActualizarCliente" styleClass="btn-secundary" stylesheets="@../css/buttom-style.css" text="Actualizar" />
+                  <Button mnemonicParsing="false" onAction="#handleEliminarCliente" styleClass="btn-third" stylesheets="@../css/buttom-style.css" text="Eliminar" />
                </children>
             </VBox>
          </left>
